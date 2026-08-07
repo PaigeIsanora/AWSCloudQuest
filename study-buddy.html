@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CloudQuest: AWS Study Buddy</title>
+    <link rel="stylesheet" href="study-buddy.css">
+</head>
+<body>
+    <!-- Animated background elements -->
+    <div class="bg-stars" id="bgStars"></div>
+    <div class="bg-sparkles" id="bgSparkles"></div>
+
+    <!-- Header / Navigation -->
+    <header class="game-header">
+        <div class="header-inner">
+            <h1 class="game-title">
+                <span class="title-icon">&#9729;</span>
+                CloudQuest
+                <span class="title-icon">&#9733;</span>
+            </h1>
+            <p class="subtitle">AWS Cloud Practitioner Study Buddy</p>
+        </div>
+        <nav class="game-nav">
+            <button class="nav-btn active" data-mode="home" aria-label="Home">
+                <span class="nav-icon">&#127968;</span> Home
+            </button>
+            <button class="nav-btn" data-mode="flashcards" aria-label="Flashcards">
+                <span class="nav-icon">&#128196;</span> Flashcards
+            </button>
+            <button class="nav-btn" data-mode="quiz" aria-label="Quiz">
+                <span class="nav-icon">&#127942;</span> Quiz
+            </button>
+            <button class="nav-btn" data-mode="progress" aria-label="Progress">
+                <span class="nav-icon">&#11088;</span> Progress
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="game-main">
+
+        <!-- Home Screen -->
+        <section class="screen active" id="screen-home">
+            <div class="home-card">
+                <div class="mascot">&#9729;&#65039;</div>
+                <h2>Welcome to CloudQuest!</h2>
+                <p class="home-desc">Your ultimate study buddy for the AWS Cloud Practitioner exam. Pick a domain to study flashcards or test yourself with a quiz!</p>
+                <div class="domain-grid">
+                    <button class="domain-btn" data-domain="cloud-concepts">
+                        <span class="domain-icon">&#9729;</span>
+                        <span class="domain-label">Cloud Concepts</span>
+                    </button>
+                    <button class="domain-btn" data-domain="security">
+                        <span class="domain-icon">&#128274;</span>
+                        <span class="domain-label">Security & Compliance</span>
+                    </button>
+                    <button class="domain-btn" data-domain="technology">
+                        <span class="domain-icon">&#128187;</span>
+                        <span class="domain-label">Cloud Technology & Services</span>
+                    </button>
+                    <button class="domain-btn" data-domain="billing">
+                        <span class="domain-icon">&#128176;</span>
+                        <span class="domain-label">Billing & Pricing</span>
+                    </button>
+                </div>
+                <div class="home-actions">
+                    <button class="action-btn btn-flashcards" id="startFlashcards">&#128196; Study Flashcards</button>
+                    <button class="action-btn btn-quiz" id="startQuiz">&#127942; Take a Quiz</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Flashcards Screen -->
+        <section class="screen" id="screen-flashcards">
+            <div class="flashcard-header">
+                <h2>Flashcards</h2>
+                <div class="flashcard-controls">
+                    <select id="flashcardDomain" class="domain-select" aria-label="Select domain">
+                        <option value="all">All Domains</option>
+                        <option value="cloud-concepts">Cloud Concepts</option>
+                        <option value="security">Security & Compliance</option>
+                        <option value="technology">Cloud Technology & Services</option>
+                        <option value="billing">Billing & Pricing</option>
+                    </select>
+                    <button class="shuffle-btn" id="shuffleCards" aria-label="Shuffle cards">&#128256; Shuffle</button>
+                </div>
+            </div>
+            <div class="flashcard-area">
+                <button class="card-nav-btn prev-btn" id="prevCard" aria-label="Previous card">&#9664;</button>
+                <div class="flashcard" id="flashcard" role="button" aria-label="Click to flip card" tabindex="0">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="card-domain-tag" id="cardDomainTag">Cloud Concepts</div>
+                            <p class="card-question" id="cardQuestion">Click to start!</p>
+                        </div>
+                        <div class="flashcard-back">
+                            <p class="card-answer" id="cardAnswer">The answer will appear here</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="card-nav-btn next-btn" id="nextCard" aria-label="Next card">&#9654;</button>
+            </div>
+            <div class="flashcard-progress">
+                <span id="cardCounter">0 / 0</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="cardProgressFill"></div>
+                </div>
+            </div>
+            <div class="flashcard-actions">
+                <button class="action-btn btn-know" id="markKnown">&#9989; Got It!</button>
+                <button class="action-btn btn-review" id="markReview">&#128260; Review Again</button>
+            </div>
+        </section>
+
+        <!-- Quiz Screen -->
+        <section class="screen" id="screen-quiz">
+            <div class="quiz-setup" id="quizSetup">
+                <h2>Quiz Time!</h2>
+                <p class="quiz-desc">Test your knowledge with practice questions</p>
+                <div class="quiz-options">
+                    <label class="quiz-option-label" for="quizDomain">Domain:</label>
+                    <select id="quizDomain" class="domain-select">
+                        <option value="all">All Domains</option>
+                        <option value="cloud-concepts">Cloud Concepts</option>
+                        <option value="security">Security & Compliance</option>
+                        <option value="technology">Cloud Technology & Services</option>
+                        <option value="billing">Billing & Pricing</option>
+                    </select>
+                    <label class="quiz-option-label" for="quizLength">Questions:</label>
+                    <select id="quizLength" class="domain-select">
+                        <option value="5">5 Questions</option>
+                        <option value="10" selected>10 Questions</option>
+                        <option value="20">20 Questions</option>
+                        <option value="all">All Questions</option>
+                    </select>
+                </div>
+                <button class="action-btn btn-start-quiz" id="beginQuiz">&#127937; Start Quiz</button>
+            </div>
+            <div class="quiz-active" id="quizActive" style="display:none;">
+                <div class="quiz-progress-header">
+                    <span id="quizCounter">Question 1 of 10</span>
+                    <span class="quiz-score" id="quizScore">Score: 0</span>
+                </div>
+                <div class="progress-bar quiz-progress-bar">
+                    <div class="progress-fill" id="quizProgressFill"></div>
+                </div>
+                <div class="quiz-question-card">
+                    <div class="quiz-domain-tag" id="quizDomainTag">Cloud Concepts</div>
+                    <p class="quiz-question-text" id="quizQuestionText">Question text here</p>
+                    <div class="quiz-answers" id="quizAnswers">
+                        <!-- Answer buttons populated by JS -->
+                    </div>
+                </div>
+                <div class="quiz-feedback" id="quizFeedback" style="display:none;">
+                    <p class="feedback-text" id="feedbackText"></p>
+                    <p class="feedback-explanation" id="feedbackExplanation"></p>
+                    <button class="action-btn btn-next-q" id="nextQuestion">Next Question &#9654;</button>
+                </div>
+            </div>
+            <div class="quiz-results" id="quizResults" style="display:none;">
+                <div class="results-card">
+                    <h2>Quiz Complete!</h2>
+                    <div class="results-score" id="resultsScore">
+                        <span class="score-number">8</span>
+                        <span class="score-divider">/</span>
+                        <span class="score-total">10</span>
+                    </div>
+                    <p class="results-message" id="resultsMessage">Great job!</p>
+                    <div class="results-breakdown" id="resultsBreakdown"></div>
+                    <div class="results-actions">
+                        <button class="action-btn btn-retry" id="retryQuiz">&#128260; Try Again</button>
+                        <button class="action-btn btn-flashcards" id="reviewMissed">&#128196; Review Missed</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Progress Screen -->
+        <section class="screen" id="screen-progress">
+            <div class="progress-card">
+                <h2>Your Progress</h2>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <span class="stat-number" id="statCardsStudied">0</span>
+                        <span class="stat-label">Cards Studied</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number" id="statQuizzesTaken">0</span>
+                        <span class="stat-label">Quizzes Taken</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number" id="statAvgScore">0%</span>
+                        <span class="stat-label">Avg. Score</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number" id="statStreak">0</span>
+                        <span class="stat-label">Day Streak</span>
+                    </div>
+                </div>
+                <h3>Domain Mastery</h3>
+                <div class="domain-progress" id="domainProgress">
+                    <div class="domain-progress-row">
+                        <span class="dp-label">Cloud Concepts</span>
+                        <div class="progress-bar"><div class="progress-fill" id="prog-cloud-concepts" style="width:0%"></div></div>
+                        <span class="dp-percent" id="pct-cloud-concepts">0%</span>
+                    </div>
+                    <div class="domain-progress-row">
+                        <span class="dp-label">Security & Compliance</span>
+                        <div class="progress-bar"><div class="progress-fill" id="prog-security" style="width:0%"></div></div>
+                        <span class="dp-percent" id="pct-security">0%</span>
+                    </div>
+                    <div class="domain-progress-row">
+                        <span class="dp-label">Technology & Services</span>
+                        <div class="progress-bar"><div class="progress-fill" id="prog-technology" style="width:0%"></div></div>
+                        <span class="dp-percent" id="pct-technology">0%</span>
+                    </div>
+                    <div class="domain-progress-row">
+                        <span class="dp-label">Billing & Pricing</span>
+                        <div class="progress-bar"><div class="progress-fill" id="prog-billing" style="width:0%"></div></div>
+                        <span class="dp-percent" id="pct-billing">0%</span>
+                    </div>
+                </div>
+                <button class="action-btn btn-reset" id="resetProgress">&#128465; Reset Progress</button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="game-footer">
+        <p>CloudQuest v1.0 &#9733; Good luck on Monday! &#9733; You've got this!</p>
+    </footer>
+
+    <script src="study-data.js"></script>
+    <script src="study-app.js"></script>
+</body>
+</html>
