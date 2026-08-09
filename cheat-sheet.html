@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Cloud Practitioner Cheat Sheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink-hot: #ff69b4;
+            --pink-light: #ffb6e1;
+            --purple-deep: #9b30ff;
+            --purple-light: #cc99ff;
+            --blue-cyber: #00ccff;
+            --blue-light: #99eeff;
+            --green-lime: #7fff00;
+            --yellow-star: #ffff00;
+            --orange-glow: #ff9900;
+            --bg-dark: #1a0033;
+            --bg-mid: #2d004d;
+            --card-bg: rgba(255, 255, 255, 0.06);
+            --card-border: rgba(255, 255, 255, 0.15);
+            --text-main: #ffffff;
+            --text-muted: #ccaaff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-mid) 40%, #3d0066 100%);
+            font-family: 'Comic Neue', cursive, sans-serif;
+            color: var(--text-main);
+            padding: 1.5rem;
+            line-height: 1.6;
+        }
+
+        h1 {
+            font-family: 'Fredoka One', cursive;
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 0.3rem;
+            background: linear-gradient(90deg, var(--blue-cyber), var(--pink-hot), var(--yellow-star));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        /* Navigation */
+        .toc {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            position: sticky;
+            top: 0;
+            background: rgba(26, 0, 51, 0.95);
+            padding: 0.8rem;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+        }
+
+        .toc a {
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 0.4rem 0.8rem;
+            border: 2px solid var(--purple-light);
+            border-radius: 20px;
+            color: var(--text-main);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .toc a:hover {
+            border-color: var(--blue-cyber);
+            background: rgba(0, 204, 255, 0.15);
+            box-shadow: 0 0 10px rgba(0, 204, 255, 0.3);
+        }
+
+        /* Section headers */
+        .section-title {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.6rem;
+            margin: 2.5rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--pink-hot);
+            color: var(--blue-cyber);
+        }
+
+        .section-title .emoji { margin-right: 0.5rem; }
+
+        /* Cards */
+        .glossary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 2px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.2rem;
+            transition: all 0.2s;
+        }
+
+        .card:hover {
+            border-color: var(--purple-light);
+            box-shadow: 0 4px 20px rgba(155, 48, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .card-name {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--pink-hot);
+            margin-bottom: 0.3rem;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-example {
+            font-size: 0.85rem;
+            background: rgba(0, 204, 255, 0.08);
+            border-left: 3px solid var(--blue-cyber);
+            padding: 0.5rem 0.8rem;
+            border-radius: 0 8px 8px 0;
+            color: var(--blue-light);
+        }
+
+        .card-example strong {
+            color: var(--green-lime);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        /* Pillar / Advantage cards - wider */
+        .pillar-card {
+            background: linear-gradient(135deg, rgba(155, 48, 255, 0.1), rgba(0, 204, 255, 0.05));
+            border: 2px solid var(--purple-light);
+            border-radius: 12px;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .pillar-card .card-name {
+            color: var(--yellow-star);
+            font-size: 1.1rem;
+        }
+
+        /* Category label */
+        .category-label {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .cat-compute { background: rgba(255, 105, 180, 0.2); border: 1px solid var(--pink-hot); color: var(--pink-light); }
+        .cat-storage { background: rgba(0, 204, 255, 0.2); border: 1px solid var(--blue-cyber); color: var(--blue-light); }
+        .cat-database { background: rgba(127, 255, 0, 0.2); border: 1px solid var(--green-lime); color: var(--green-lime); }
+        .cat-network { background: rgba(255, 153, 0, 0.2); border: 1px solid var(--orange-glow); color: var(--orange-glow); }
+        .cat-security { background: rgba(255, 255, 0, 0.2); border: 1px solid var(--yellow-star); color: var(--yellow-star); }
+        .cat-management { background: rgba(204, 153, 255, 0.2); border: 1px solid var(--purple-light); color: var(--purple-light); }
+        .cat-integration { background: rgba(153, 238, 255, 0.2); border: 1px solid var(--blue-light); color: var(--blue-light); }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0 1rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 2px solid rgba(155, 48, 255, 0.2);
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.7rem; }
+            .glossary-grid { grid-template-columns: 1fr; }
+            .toc { position: static; }
+            body { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<h1>AWS Cloud Practitioner Cheat Sheet</h1>
+<p class="subtitle">Glossary + Examples for your Monday exam</p>
+
+<nav class="toc">
+    <a href="#advantages">6 Advantages</a>
+    <a href="#pillars">Well-Architected</a>
+    <a href="#compute">Compute</a>
+    <a href="#storage">Storage</a>
+    <a href="#database">Database</a>
+    <a href="#network">Networking</a>
+    <a href="#security">Security</a>
+    <a href="#management">Management</a>
+    <a href="#integration">App Integration</a>
+    <a href="#billing">Billing</a>
+</nav>
+
+<!-- ===== 6 ADVANTAGES OF CLOUD COMPUTING ===== -->
+<h2 class="section-title" id="advantages"><span class="emoji">&#9729;</span>6 Advantages of Cloud Computing</h2>
+
+<div class="pillar-card">
+    <p class="card-name">1. Trade Capital Expense for Variable Expense</p>
+    <p class="card-desc">Instead of investing in data centers before you know how you'll use them, pay only when you consume computing resources and only for how much you consume.</p>
+    <div class="card-example"><strong>Example: </strong>A startup launches an app without buying any servers. They pay $50/month on AWS instead of $50,000 upfront for hardware.</div>
+</div>
+
+<div class="pillar-card">
+    <p class="card-name">2. Benefit from Massive Economies of Scale</p>
+    <p class="card-desc">Because AWS aggregates usage from hundreds of thousands of customers, they achieve higher economies of scale, translating into lower pay-as-you-go prices.</p>
+    <div class="card-example"><strong>Example: </strong>AWS can buy hardware at bulk rates far cheaper than any single company, passing savings to you as lower per-hour prices.</div>
+</div>
+
+<div class="pillar-card">
+    <p class="card-name">3. Stop Guessing Capacity</p>
+    <p class="card-desc">Eliminate guessing about infrastructure capacity needs. Scale up or down within minutes as demand changes, rather than sitting on idle or insufficient resources.</p>
+    <div class="card-example"><strong>Example: </strong>An e-commerce site auto-scales from 2 servers to 20 during Black Friday, then back to 2 on Tuesday. No waste, no crashes.</div>
+</div>
+
+<div class="pillar-card">
+    <p class="card-name">4. Increase Speed and Agility</p>
+    <p class="card-desc">New IT resources are a click away, reducing the time to make resources available from weeks to minutes. This dramatically increases agility for experimentation.</p>
+    <div class="card-example"><strong>Example: </strong>A developer spins up a test environment in 5 minutes, experiments, then deletes it. No procurement tickets, no waiting.</div>
+</div>
+
+<div class="pillar-card">
+    <p class="card-name">5. Stop Spending Money Running Data Centers</p>
+    <p class="card-desc">Focus on projects that differentiate your business, not the undifferentiated heavy lifting of racking, stacking, and powering servers.</p>
+    <div class="card-example"><strong>Example: </strong>A healthcare company spends time building patient features instead of managing cooling systems, physical security, and cabling.</div>
+</div>
+
+<div class="pillar-card">
+    <p class="card-name">6. Go Global in Minutes</p>
+    <p class="card-desc">Easily deploy your application in multiple AWS Regions around the world. Provide lower latency and a better experience to customers at minimal cost.</p>
+    <div class="card-example"><strong>Example: </strong>A gaming company deploys in US, EU, and Asia-Pacific regions so players everywhere get &lt;50ms latency.</div>
+</div>
+
+<!-- ===== WELL-ARCHITECTED FRAMEWORK ===== -->
+<h2 class="section-title" id="pillars"><span class="emoji">&#127959;</span>AWS Well-Architected Framework (6 Pillars)</h2>
+
+<div class="pillar-card">
+    <p class="card-name">1. Operational Excellence</p>
+    <p class="card-desc">Run and monitor systems to deliver business value. Continuously improve supporting processes and procedures. Automate changes, respond to events, and define standards.</p>
+    <div class="card-example"><strong>Example: </strong>Using CloudFormation to deploy infrastructure as code, and CloudWatch alarms to auto-detect and respond to issues without manual intervention.</div>
+</div>
+
+<div class="pillar-card">
+    <p class="card-name">2. Security</p>
+    <p class="card-desc">Protect information, systems, and assets through risk assessments and mitigation strategies. Confidentiality, integrity, and availability of data.</p>
+    <div class="card-example"><strong>Example: </strong>Enabling MFA on all IAM users, encrypting S3 data with KMS, and using CloudTrail to log every API call for auditing.</div>
+</div>
+
+<div class="pillar-card">
+    <p class="card-name">3. Reliability</p>
+    <p class="card-desc">Ensure a workload performs its intended function correctly and consistently. Recover from failures, meet demand, and mitigate disruptions.</p>
+    <div class="card-example"><strong>Example: </strong>Deploying an app across 3 Availability Zones with Auto Scaling, so if one AZ goes down, traffic shifts to the others automatically.</div>
+</div>
+
+<div class="pillar-card">
+    <p class="card-name">4. Performance Efficiency</p>
+    <p class="card-desc">Use computing resources efficiently to meet requirements. Maintain efficiency as demand changes and technologies evolve.</p>
+    <div class="card-example"><strong>Example: </strong>Using Lambda for sporadic batch jobs (no idle servers) and CloudFront CDN to cache static assets at edge locations near users.</div>
+</div>
+
+<div class="pillar-card">
+    <p class="card-name">5. Cost Optimization</p>
+    <p class="card-desc">Avoid unnecessary costs. Understand and control where money is being spent. Select the right number and type of resources.</p>
+    <div class="card-example"><strong>Example: </strong>Purchasing Reserved Instances for steady-state workloads (72% savings), using Spot Instances for fault-tolerant batch processing.</div>
+</div>
+
+<div class="pillar-card">
+    <p class="card-name">6. Sustainability</p>
+    <p class="card-desc">Minimize environmental impacts of running cloud workloads. Reduce energy consumption and increase efficiency through right-sizing and managed services.</p>
+    <div class="card-example"><strong>Example: </strong>Using Graviton (ARM) instances that use less energy, deleting unused EBS snapshots, and right-sizing over-provisioned instances.</div>
+</div>
+
+<!-- ===== COMPUTE SERVICES ===== -->
+<h2 class="section-title" id="compute"><span class="emoji">&#128187;</span>Compute Services</h2>
+<div class="glossary-grid">
+
+<div class="card">
+    <span class="category-label cat-compute">Compute</span>
+    <p class="card-name">Amazon EC2</p>
+    <p class="card-desc">Elastic Compute Cloud. Resizable virtual servers (instances) in the cloud. You choose instance type, OS, and pay per second/hour.</p>
+    <div class="card-example"><strong>Example: </strong>Running a Node.js web server on a t3.micro instance to host a company website.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-compute">Compute</span>
+    <p class="card-name">AWS Lambda</p>
+    <p class="card-desc">Serverless compute. Run code in response to events without provisioning servers. Pay only for compute time consumed (per ms).</p>
+    <div class="card-example"><strong>Example: </strong>A function that resizes uploaded images automatically when they land in an S3 bucket.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-compute">Compute</span>
+    <p class="card-name">AWS Elastic Beanstalk</p>
+    <p class="card-desc">PaaS. Upload your code and it handles capacity provisioning, load balancing, auto-scaling, and health monitoring.</p>
+    <div class="card-example"><strong>Example: </strong>Deploying a Python Flask app by just uploading a ZIP file — Beanstalk configures everything.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-compute">Compute</span>
+    <p class="card-name">Amazon ECS</p>
+    <p class="card-desc">Elastic Container Service. Fully managed container orchestration (Docker). AWS-native alternative to Kubernetes.</p>
+    <div class="card-example"><strong>Example: </strong>Running 10 microservices as Docker containers managed by ECS with auto-scaling.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-compute">Compute</span>
+    <p class="card-name">Amazon EKS</p>
+    <p class="card-desc">Elastic Kubernetes Service. Managed Kubernetes for teams already using K8s. AWS handles the control plane.</p>
+    <div class="card-example"><strong>Example: </strong>Migrating an existing on-prem Kubernetes cluster to AWS without rewriting deployment configs.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-compute">Compute</span>
+    <p class="card-name">AWS Fargate</p>
+    <p class="card-desc">Serverless compute engine for containers. Works with ECS/EKS. No need to manage underlying EC2 instances.</p>
+    <div class="card-example"><strong>Example: </strong>Running containers without worrying about patching, scaling, or managing the host servers.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-compute">Compute</span>
+    <p class="card-name">Amazon Lightsail</p>
+    <p class="card-desc">Simplified compute for small projects. Fixed monthly pricing, bundled with storage, networking, and DNS. Easy for beginners.</p>
+    <div class="card-example"><strong>Example: </strong>Hosting a WordPress blog for $5/month with predictable pricing.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-compute">Compute</span>
+    <p class="card-name">AWS Outposts</p>
+    <p class="card-desc">Run AWS infrastructure on-premises. Same hardware and APIs as the cloud but in your own data center for low-latency or data residency needs.</p>
+    <div class="card-example"><strong>Example: </strong>A factory needs &lt;5ms latency for machine learning inference, so they run it on an Outpost rack on-site.</div>
+</div>
+
+</div>
+
+<!-- ===== STORAGE SERVICES ===== -->
+<h2 class="section-title" id="storage"><span class="emoji">&#128230;</span>Storage Services</h2>
+<div class="glossary-grid">
+
+<div class="card">
+    <span class="category-label cat-storage">Storage</span>
+    <p class="card-name">Amazon S3</p>
+    <p class="card-desc">Simple Storage Service. Object storage with 11 nines (99.999999999%) durability. Unlimited storage, files up to 5TB. Multiple storage classes for cost control.</p>
+    <div class="card-example"><strong>Example: </strong>Storing user-uploaded photos, hosting a static website, or keeping data lake files for analytics.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-storage">Storage</span>
+    <p class="card-name">S3 Storage Classes</p>
+    <p class="card-desc"><strong>Standard</strong> (frequent access), <strong>Standard-IA</strong> (infrequent, fast retrieval), <strong>One Zone-IA</strong> (single AZ), <strong>Intelligent-Tiering</strong> (auto-moves), <strong>Glacier Instant/Flexible/Deep Archive</strong> (archival).</p>
+    <div class="card-example"><strong>Example: </strong>Moving 7-year-old compliance logs to Glacier Deep Archive at $1/TB/month instead of $23/TB on Standard.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-storage">Storage</span>
+    <p class="card-name">Amazon EBS</p>
+    <p class="card-desc">Elastic Block Store. Persistent block storage volumes for EC2 instances. Like a virtual hard drive. Snapshots for backup.</p>
+    <div class="card-example"><strong>Example: </strong>Attaching a 100GB SSD volume to an EC2 instance running a database that needs persistent storage.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-storage">Storage</span>
+    <p class="card-name">Amazon EFS</p>
+    <p class="card-desc">Elastic File System. Managed NFS file system. Multiple EC2 instances can access the same files simultaneously. Auto-scales.</p>
+    <div class="card-example"><strong>Example: </strong>10 web servers sharing the same content directory so file uploads are instantly visible from all servers.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-storage">Storage</span>
+    <p class="card-name">AWS Storage Gateway</p>
+    <p class="card-desc">Hybrid cloud storage. Connects on-premises environments to cloud storage. Caches frequently accessed data locally.</p>
+    <div class="card-example"><strong>Example: </strong>An office file server that automatically backs up to S3 while keeping recent files cached locally for fast access.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-storage">Storage</span>
+    <p class="card-name">AWS Snow Family</p>
+    <p class="card-desc"><strong>Snowcone</strong> (8TB), <strong>Snowball Edge</strong> (80TB), <strong>Snowmobile</strong> (100PB truck). Physical devices for massive offline data transfer.</p>
+    <div class="card-example"><strong>Example: </strong>Migrating 50TB of video footage to AWS using a Snowball Edge device shipped overnight instead of weeks of uploads.</div>
+</div>
+
+</div>
+
+<!-- ===== DATABASE SERVICES ===== -->
+<h2 class="section-title" id="database"><span class="emoji">&#128450;</span>Database Services</h2>
+<div class="glossary-grid">
+
+<div class="card">
+    <span class="category-label cat-database">Database</span>
+    <p class="card-name">Amazon RDS</p>
+    <p class="card-desc">Relational Database Service. Managed SQL databases: MySQL, PostgreSQL, MariaDB, Oracle, SQL Server. AWS handles patching, backups, scaling.</p>
+    <div class="card-example"><strong>Example: </strong>Running a MySQL database for a web app without managing OS patches, backups, or replication yourself.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-database">Database</span>
+    <p class="card-name">Amazon Aurora</p>
+    <p class="card-desc">Cloud-native relational DB compatible with MySQL and PostgreSQL. Up to 5x faster than MySQL, 3x faster than PostgreSQL. Auto-scales storage.</p>
+    <div class="card-example"><strong>Example: </strong>A high-traffic SaaS platform needing MySQL compatibility but with better performance and automatic failover.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-database">Database</span>
+    <p class="card-name">Amazon DynamoDB</p>
+    <p class="card-desc">Fully managed NoSQL key-value and document database. Single-digit millisecond latency at any scale. Serverless with auto-scaling.</p>
+    <div class="card-example"><strong>Example: </strong>Storing user session data for a mobile app that needs &lt;5ms reads across millions of users.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-database">Database</span>
+    <p class="card-name">Amazon Redshift</p>
+    <p class="card-desc">Fully managed data warehouse. Run complex SQL analytics on petabytes of structured data. Columnar storage for fast aggregation.</p>
+    <div class="card-example"><strong>Example: </strong>A retail company analyzing 3 years of sales data to find purchasing trends across regions.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-database">Database</span>
+    <p class="card-name">Amazon ElastiCache</p>
+    <p class="card-desc">Managed in-memory caching (Redis or Memcached). Sub-millisecond response times for frequently accessed data.</p>
+    <div class="card-example"><strong>Example: </strong>Caching database query results so repeated requests are served from memory instead of hitting the database.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-database">Database</span>
+    <p class="card-name">Amazon DocumentDB</p>
+    <p class="card-desc">Managed document database compatible with MongoDB. Scalable JSON document storage.</p>
+    <div class="card-example"><strong>Example: </strong>A content management system storing articles and metadata as JSON documents with flexible schemas.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-database">Database</span>
+    <p class="card-name">Amazon Neptune</p>
+    <p class="card-desc">Managed graph database for highly connected datasets. Supports property graphs and RDF.</p>
+    <div class="card-example"><strong>Example: </strong>Building a social network feature showing "friends of friends" or recommendation engines.</div>
+</div>
+
+</div>
+
+<!-- ===== NETWORKING SERVICES ===== -->
+<h2 class="section-title" id="network"><span class="emoji">&#127760;</span>Networking & Content Delivery</h2>
+<div class="glossary-grid">
+
+<div class="card">
+    <span class="category-label cat-network">Networking</span>
+    <p class="card-name">Amazon VPC</p>
+    <p class="card-desc">Virtual Private Cloud. Your own logically isolated network in AWS. Control IP ranges, subnets, route tables, internet gateways, and security.</p>
+    <div class="card-example"><strong>Example: </strong>Creating a private subnet for databases (no internet access) and a public subnet for web servers.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-network">Networking</span>
+    <p class="card-name">Amazon CloudFront</p>
+    <p class="card-desc">Global CDN (Content Delivery Network). Caches content at 400+ Edge Locations worldwide for low-latency delivery.</p>
+    <div class="card-example"><strong>Example: </strong>Serving a website's images and videos from the nearest Edge Location instead of a single origin server.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-network">Networking</span>
+    <p class="card-name">Amazon Route 53</p>
+    <p class="card-desc">Scalable DNS web service. Translates domain names to IP addresses. Also handles domain registration and health checks.</p>
+    <div class="card-example"><strong>Example: </strong>Routing "myapp.com" to your load balancer, with failover to a backup region if the primary goes down.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-network">Networking</span>
+    <p class="card-name">Elastic Load Balancing (ELB)</p>
+    <p class="card-desc">Distributes incoming traffic across multiple targets. Types: Application LB (HTTP/Layer 7), Network LB (TCP/Layer 4), Gateway LB.</p>
+    <div class="card-example"><strong>Example: </strong>Spreading web requests evenly across 5 EC2 instances so no single server gets overloaded.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-network">Networking</span>
+    <p class="card-name">AWS Direct Connect</p>
+    <p class="card-desc">Dedicated private network connection from your data center to AWS. Bypasses the public internet for consistent performance.</p>
+    <div class="card-example"><strong>Example: </strong>A bank with strict compliance needs a private 10Gbps line from their office to AWS instead of using the internet.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-network">Networking</span>
+    <p class="card-name">AWS Global Accelerator</p>
+    <p class="card-desc">Directs traffic to optimal endpoints via the AWS global network. Improves availability and performance for global users.</p>
+    <div class="card-example"><strong>Example: </strong>Users in Europe are automatically routed to the closest healthy endpoint, cutting latency by 60%.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-network">Networking</span>
+    <p class="card-name">AWS VPN</p>
+    <p class="card-desc">Encrypted connection between your on-premises network and your VPC over the public internet. Cheaper alternative to Direct Connect.</p>
+    <div class="card-example"><strong>Example: </strong>A small office securely connecting to their AWS VPC over an encrypted tunnel for $0.05/hr.</div>
+</div>
+
+</div>
+
+<!-- ===== SECURITY SERVICES ===== -->
+<h2 class="section-title" id="security"><span class="emoji">&#128274;</span>Security, Identity & Compliance</h2>
+<div class="glossary-grid">
+
+<div class="card">
+    <span class="category-label cat-security">Security</span>
+    <p class="card-name">AWS IAM</p>
+    <p class="card-desc">Identity and Access Management. Create Users, Groups, Roles, and Policies to control who can access what. Free to use.</p>
+    <div class="card-example"><strong>Example: </strong>Creating a "Developers" group with permission to deploy code but not delete databases.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-security">Security</span>
+    <p class="card-name">IAM Roles</p>
+    <p class="card-desc">Temporary credentials for services or users. No permanent password/keys. Can be assumed by EC2, Lambda, or cross-account users.</p>
+    <div class="card-example"><strong>Example: </strong>An EC2 instance assumes a role to read from S3 — no access keys stored on the server.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-security">Security</span>
+    <p class="card-name">AWS CloudTrail</p>
+    <p class="card-desc">Logs all API calls and account activity across your AWS infrastructure. Essential for auditing and compliance.</p>
+    <div class="card-example"><strong>Example: </strong>Investigating who deleted an S3 bucket last Tuesday by searching CloudTrail logs.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-security">Security</span>
+    <p class="card-name">Amazon GuardDuty</p>
+    <p class="card-desc">Intelligent threat detection using ML and anomaly detection. Monitors VPC Flow Logs, CloudTrail, and DNS logs continuously.</p>
+    <div class="card-example"><strong>Example: </strong>GuardDuty alerts you that an EC2 instance is communicating with a known cryptocurrency mining IP.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-security">Security</span>
+    <p class="card-name">AWS Shield</p>
+    <p class="card-desc">Managed DDoS protection. <strong>Standard</strong> = free, automatic. <strong>Advanced</strong> = paid, enhanced protection + 24/7 response team.</p>
+    <div class="card-example"><strong>Example: </strong>Shield Standard automatically mitigates a volumetric DDoS attack on your website without you doing anything.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-security">Security</span>
+    <p class="card-name">AWS WAF</p>
+    <p class="card-desc">Web Application Firewall. Filter HTTP/HTTPS requests with custom rules. Block SQL injection, XSS, and bot traffic.</p>
+    <div class="card-example"><strong>Example: </strong>Blocking all requests from specific countries or requests containing SQL injection patterns.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-security">Security</span>
+    <p class="card-name">AWS KMS</p>
+    <p class="card-desc">Key Management Service. Create and manage encryption keys. Integrated with S3, EBS, RDS, etc. for encryption at rest.</p>
+    <div class="card-example"><strong>Example: </strong>Encrypting all S3 objects with a KMS key so even if someone accesses the bucket, data is unreadable.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-security">Security</span>
+    <p class="card-name">AWS Config</p>
+    <p class="card-desc">Records and evaluates resource configurations over time. Set rules to check compliance automatically.</p>
+    <div class="card-example"><strong>Example: </strong>A rule that alerts you whenever an S3 bucket is made public, flagging it as non-compliant.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-security">Security</span>
+    <p class="card-name">Amazon Inspector</p>
+    <p class="card-desc">Automated vulnerability scanning for EC2 instances and container images. Checks for CVEs and network exposure.</p>
+    <div class="card-example"><strong>Example: </strong>Inspector finds that your EC2 instance has an unpatched Apache vulnerability and flags it as critical.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-security">Security</span>
+    <p class="card-name">Amazon Macie</p>
+    <p class="card-desc">Uses ML to discover, classify, and protect sensitive data (PII, financial data) stored in S3.</p>
+    <div class="card-example"><strong>Example: </strong>Macie finds credit card numbers accidentally stored in an S3 bucket and alerts the security team.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-security">Security</span>
+    <p class="card-name">AWS Secrets Manager</p>
+    <p class="card-desc">Store, rotate, and manage secrets (database passwords, API keys). Automatic rotation supported.</p>
+    <div class="card-example"><strong>Example: </strong>Your app retrieves its database password from Secrets Manager at runtime instead of hardcoding it.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-security">Security</span>
+    <p class="card-name">Security Groups vs NACLs</p>
+    <p class="card-desc"><strong>Security Groups</strong>: instance-level firewall, stateful, allow rules only. <strong>NACLs</strong>: subnet-level, stateless, allow + deny rules.</p>
+    <div class="card-example"><strong>Example: </strong>Security group allows port 443 inbound to a web server. NACL blocks a specific IP range at the subnet level.</div>
+</div>
+
+</div>
+
+<!-- ===== MANAGEMENT & GOVERNANCE ===== -->
+<h2 class="section-title" id="management"><span class="emoji">&#128736;</span>Management & Governance</h2>
+<div class="glossary-grid">
+
+<div class="card">
+    <span class="category-label cat-management">Management</span>
+    <p class="card-name">Amazon CloudWatch</p>
+    <p class="card-desc">Monitoring and observability service. Collects metrics, logs, and events. Set alarms and dashboards for your resources.</p>
+    <div class="card-example"><strong>Example: </strong>An alarm triggers when CPU usage exceeds 80% for 5 minutes, sending you an email notification.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-management">Management</span>
+    <p class="card-name">AWS CloudFormation</p>
+    <p class="card-desc">Infrastructure as Code (IaC). Define resources in JSON/YAML templates. Deploy, update, and delete as "stacks."</p>
+    <div class="card-example"><strong>Example: </strong>A template that creates a VPC, subnets, EC2 instances, and an RDS database in one click — repeatable across environments.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-management">Management</span>
+    <p class="card-name">AWS Systems Manager</p>
+    <p class="card-desc">Manage EC2 instances at scale. Patch management, run commands, parameter store for config values, session manager for SSH-free access.</p>
+    <div class="card-example"><strong>Example: </strong>Patching 200 EC2 instances at once during a maintenance window without logging into each one.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-management">Management</span>
+    <p class="card-name">AWS Trusted Advisor</p>
+    <p class="card-desc">Real-time best practice checks across 5 categories: cost optimization, performance, security, fault tolerance, service limits.</p>
+    <div class="card-example"><strong>Example: </strong>Trusted Advisor flags that you have idle EC2 instances costing $300/month and recommends stopping them.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-management">Management</span>
+    <p class="card-name">AWS Organizations</p>
+    <p class="card-desc">Centrally manage multiple AWS accounts. Apply policies (SCPs) across accounts. Consolidated billing for volume discounts.</p>
+    <div class="card-example"><strong>Example: </strong>A company creates separate accounts for Dev, Staging, and Prod, governed by a central policy that prevents anyone from disabling CloudTrail.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-management">Management</span>
+    <p class="card-name">AWS Auto Scaling</p>
+    <p class="card-desc">Automatically adjusts capacity based on demand. Scales EC2 instances, DynamoDB tables, Aurora replicas, etc.</p>
+    <div class="card-example"><strong>Example: </strong>Scaling from 2 to 8 EC2 instances during peak hours and back to 2 at night.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-management">Management</span>
+    <p class="card-name">AWS Control Tower</p>
+    <p class="card-desc">Set up and govern a secure, multi-account AWS environment based on best practices. Automates account setup with guardrails.</p>
+    <div class="card-example"><strong>Example: </strong>Automatically creating new team accounts with pre-configured security guardrails and logging.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-management">Management</span>
+    <p class="card-name">AWS Well-Architected Tool</p>
+    <p class="card-desc">Review your workloads against the 6 pillars. Identifies high-risk areas and provides improvement recommendations.</p>
+    <div class="card-example"><strong>Example: </strong>Running a review that flags your app has no Multi-AZ deployment — a reliability risk.</div>
+</div>
+
+</div>
+
+<!-- ===== APP INTEGRATION ===== -->
+<h2 class="section-title" id="integration"><span class="emoji">&#128279;</span>Application Integration & Developer Tools</h2>
+<div class="glossary-grid">
+
+<div class="card">
+    <span class="category-label cat-integration">Integration</span>
+    <p class="card-name">Amazon SQS</p>
+    <p class="card-desc">Simple Queue Service. Fully managed message queue for decoupling microservices. Messages wait in the queue until processed.</p>
+    <div class="card-example"><strong>Example: </strong>An order system puts messages in SQS; a separate payment service processes them at its own pace.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-integration">Integration</span>
+    <p class="card-name">Amazon SNS</p>
+    <p class="card-desc">Simple Notification Service. Pub/sub messaging — one message sent to many subscribers (email, SMS, Lambda, SQS, HTTP).</p>
+    <div class="card-example"><strong>Example: </strong>When a deploy finishes, SNS sends an email to the team + triggers a Lambda for post-deploy checks.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-integration">Integration</span>
+    <p class="card-name">Amazon EventBridge</p>
+    <p class="card-desc">Serverless event bus. Route events from AWS services, SaaS apps, or custom apps to targets like Lambda, SQS, Step Functions.</p>
+    <div class="card-example"><strong>Example: </strong>Every time an EC2 instance changes state, EventBridge triggers a Lambda to update a dashboard.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-integration">Integration</span>
+    <p class="card-name">AWS Step Functions</p>
+    <p class="card-desc">Orchestrate multiple AWS services into serverless workflows using visual state machines.</p>
+    <div class="card-example"><strong>Example: </strong>A multi-step order pipeline: validate payment &rarr; reserve inventory &rarr; send confirmation &rarr; ship.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-integration">Integration</span>
+    <p class="card-name">AWS CodePipeline</p>
+    <p class="card-desc">Fully managed CI/CD service. Automates build, test, and deploy phases every time there's a code change.</p>
+    <div class="card-example"><strong>Example: </strong>Pushing code to GitHub automatically triggers a build, runs tests, and deploys to production.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-integration">Integration</span>
+    <p class="card-name">AWS CodeDeploy</p>
+    <p class="card-desc">Automates code deployment to EC2, Lambda, or on-premises servers. Supports rolling, blue/green, and canary deployments.</p>
+    <div class="card-example"><strong>Example: </strong>Deploying a new version to 10% of servers first (canary), then rolling to the rest if no errors.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-integration">Integration</span>
+    <p class="card-name">Amazon API Gateway</p>
+    <p class="card-desc">Managed service to create, publish, and secure REST/WebSocket APIs at any scale. Handles throttling, auth, and caching.</p>
+    <div class="card-example"><strong>Example: </strong>Exposing a Lambda function as a public REST API endpoint with rate limiting and API key authentication.</div>
+</div>
+
+</div>
+
+<!-- ===== BILLING & PRICING ===== -->
+<h2 class="section-title" id="billing"><span class="emoji">&#128176;</span>Billing, Pricing & Support</h2>
+<div class="glossary-grid">
+
+<div class="card">
+    <span class="category-label cat-management">Billing</span>
+    <p class="card-name">AWS Free Tier</p>
+    <p class="card-desc">Three types: <strong>Always Free</strong> (Lambda 1M requests/mo), <strong>12 Months Free</strong> (EC2 t2.micro 750hrs/mo), <strong>Trials</strong> (short-term for specific services).</p>
+    <div class="card-example"><strong>Example: </strong>New accounts get 750 hours of EC2 t2.micro per month for a year — enough to run one instance 24/7 for free.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-management">Billing</span>
+    <p class="card-name">EC2 Pricing Models</p>
+    <p class="card-desc"><strong>On-Demand</strong> (pay/sec, no commitment), <strong>Reserved</strong> (1-3yr, up to 72% off), <strong>Spot</strong> (up to 90% off, interruptible), <strong>Savings Plans</strong> (flexible commitment), <strong>Dedicated Hosts</strong> (physical server).</p>
+    <div class="card-example"><strong>Example: </strong>Use Reserved for your always-on production DB, Spot for batch processing that can retry, On-Demand for unpredictable dev work.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-management">Billing</span>
+    <p class="card-name">AWS Cost Explorer</p>
+    <p class="card-desc">Visualize, understand, and manage costs over time. Graphs, filters, forecasting, and Savings Plans recommendations.</p>
+    <div class="card-example"><strong>Example: </strong>Discovering that 40% of your spend is on idle dev instances running overnight.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-management">Billing</span>
+    <p class="card-name">AWS Budgets</p>
+    <p class="card-desc">Set custom cost/usage budgets and get alerts (email or SNS) when you exceed or are forecasted to exceed thresholds.</p>
+    <div class="card-example"><strong>Example: </strong>Setting a $500/month budget with alerts at 80% and 100% thresholds.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-management">Billing</span>
+    <p class="card-name">AWS Pricing Calculator</p>
+    <p class="card-desc">Web tool to estimate costs before deploying. Build architecture estimates to plan budgets.</p>
+    <div class="card-example"><strong>Example: </strong>Estimating that your planned 3-tier app will cost ~$350/month before actually provisioning anything.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-management">Billing</span>
+    <p class="card-name">Consolidated Billing</p>
+    <p class="card-desc">Feature of AWS Organizations. One bill for multiple accounts + volume discounts since usage is aggregated.</p>
+    <div class="card-example"><strong>Example: </strong>Three team accounts collectively use 500TB of S3 and hit a cheaper pricing tier together.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-management">Billing</span>
+    <p class="card-name">Cost Allocation Tags</p>
+    <p class="card-desc">Key-value pairs on resources to categorize costs. Appear in billing reports for tracking by project, team, or environment.</p>
+    <div class="card-example"><strong>Example: </strong>Tagging all resources with "Project: MobileApp" so you can filter billing to see that project's exact spend.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-management">Billing</span>
+    <p class="card-name">AWS Support Plans</p>
+    <p class="card-desc"><strong>Basic</strong> (free, docs/forums), <strong>Developer</strong> ($29/mo, email support), <strong>Business</strong> ($100+/mo, 24/7 phone + all Trusted Advisor), <strong>Enterprise</strong> ($15K+/mo, TAM + Concierge).</p>
+    <div class="card-example"><strong>Example: </strong>Enterprise plan gives you a dedicated Technical Account Manager who proactively reviews your architecture.</div>
+</div>
+
+</div>
+
+<!-- ===== KEY CONCEPTS ===== -->
+<h2 class="section-title" id="concepts"><span class="emoji">&#128161;</span>Key Concepts to Remember</h2>
+<div class="glossary-grid">
+
+<div class="card">
+    <span class="category-label cat-network">Concept</span>
+    <p class="card-name">Regions & Availability Zones</p>
+    <p class="card-desc"><strong>Region</strong> = geographic location (us-east-1). <strong>AZ</strong> = isolated data center(s) within a Region (us-east-1a). Deploy across 2+ AZs for high availability.</p>
+    <div class="card-example"><strong>Example: </strong>Your app runs in us-east-1a and us-east-1b. If one AZ has an outage, the other keeps serving traffic.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-network">Concept</span>
+    <p class="card-name">Edge Locations</p>
+    <p class="card-desc">Sites used by CloudFront and Route 53 to cache content close to users. There are more Edge Locations than Regions (400+).</p>
+    <div class="card-example"><strong>Example: </strong>A user in Tokyo gets cached content from a Tokyo Edge Location instead of the origin server in Virginia.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-security">Concept</span>
+    <p class="card-name">Shared Responsibility Model</p>
+    <p class="card-desc"><strong>AWS</strong> = security OF the cloud (hardware, network, facilities, hypervisor). <strong>Customer</strong> = security IN the cloud (data, OS, firewall rules, IAM, encryption).</p>
+    <div class="card-example"><strong>Example: </strong>AWS secures the physical server. You secure what runs on it — OS patches, your app's code, and who can access your data.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-compute">Concept</span>
+    <p class="card-name">IaaS vs PaaS vs SaaS</p>
+    <p class="card-desc"><strong>IaaS</strong> (EC2) = you manage OS up. <strong>PaaS</strong> (Beanstalk) = you manage code only. <strong>SaaS</strong> (Gmail) = vendor manages everything.</p>
+    <div class="card-example"><strong>Example: </strong>EC2 = you patch the OS. Beanstalk = you just deploy code. Rekognition = you just call the API.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-compute">Concept</span>
+    <p class="card-name">Elasticity vs Scalability</p>
+    <p class="card-desc"><strong>Elasticity</strong> = automatic scale up AND down with demand. <strong>Scalability</strong> = ability to handle growth (may be manual). Elasticity implies automation.</p>
+    <div class="card-example"><strong>Example: </strong>Auto Scaling = elasticity (automatic). Adding a bigger instance manually = scalability.</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-database">Concept</span>
+    <p class="card-name">High Availability vs Fault Tolerance</p>
+    <p class="card-desc"><strong>HA</strong> = system stays accessible (may have brief interruption). <strong>FT</strong> = zero downtime even during failures (more expensive).</p>
+    <div class="card-example"><strong>Example: </strong>Multi-AZ RDS = high availability (failover in ~60s). An active-active setup with no downtime = fault tolerant.</div>
+</div>
+
+</div>
+
+<footer>
+    <p>&#9733; CloudQuest Cheat Sheet &#9733; AWS Cloud Practitioner CLF-C02 &#9733; You've got this on Monday! &#9733;</p>
+</footer>
+
+</body>
+</html>
