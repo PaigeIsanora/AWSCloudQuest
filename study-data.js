@@ -312,6 +312,67 @@ STUDY_DATA.flashcards = [
         question: 'What is the Total Cost of Ownership (TCO) concept?',
         answer: 'TCO compares the full cost of running on-premises infrastructure (hardware, power, cooling, staff, real estate) vs. cloud. Cloud typically has lower TCO due to eliminating capital expenses.'
     },
+    // ===== AWS Cloud Adoption Framework (CAF) =====
+    {
+        id: 'caf-1',
+        domain: 'cloud-concepts',
+        question: 'What is the AWS Cloud Adoption Framework (CAF)?',
+        answer: 'A framework that provides guidance and best practices to help organizations develop an efficient plan for their cloud adoption journey. It organizes guidance into 6 Perspectives across 3 transformation domains.'
+    },
+    {
+        id: 'caf-2',
+        domain: 'cloud-concepts',
+        question: 'What are the 6 Perspectives of the AWS CAF?',
+        answer: 'Business, People, Governance (business-focused), and Platform, Security, Operations (technology-focused).'
+    },
+    {
+        id: 'caf-3',
+        domain: 'cloud-concepts',
+        question: 'What does the Business Perspective of the AWS CAF focus on?',
+        answer: 'Ensures IT aligns with business needs and IT investments link to key business results. Stakeholders: CEO, CFO, COO, CIO, business managers.'
+    },
+    {
+        id: 'caf-4',
+        domain: 'cloud-concepts',
+        question: 'What does the People Perspective of the AWS CAF focus on?',
+        answer: 'Bridges the gap between technology and business by evolving organizational culture and roles. Focuses on training, staffing, and change management. Stakeholders: HR, CIO, managers.'
+    },
+    {
+        id: 'caf-5',
+        domain: 'cloud-concepts',
+        question: 'What does the Governance Perspective of the AWS CAF focus on?',
+        answer: 'Aligns IT strategy with business strategy. Focuses on skills and processes for managing budgets, measuring cloud investments, and managing risk. Stakeholders: CIO, PMO, enterprise architects.'
+    },
+    {
+        id: 'caf-6',
+        domain: 'cloud-concepts',
+        question: 'What does the Platform Perspective of the AWS CAF focus on?',
+        answer: 'Helps design, implement, and optimize AWS infrastructure. Focuses on provisioning new solutions and migrating workloads. Stakeholders: CTO, IT managers, solutions architects.'
+    },
+    {
+        id: 'caf-7',
+        domain: 'cloud-concepts',
+        question: 'What does the Security Perspective of the AWS CAF focus on?',
+        answer: 'Ensures the organization meets security objectives for visibility, auditability, control, and agility. Focuses on IAM, detective controls, infrastructure security, data protection. Stakeholders: CISO, IT security managers.'
+    },
+    {
+        id: 'caf-8',
+        domain: 'cloud-concepts',
+        question: 'What does the Operations Perspective of the AWS CAF focus on?',
+        answer: 'Ensures you run and recover IT workloads to meet business needs. Defines procedures and manages day-to-day operations. Stakeholders: IT operations managers, IT support managers.'
+    },
+    {
+        id: 'caf-9',
+        domain: 'cloud-concepts',
+        question: 'What are the 4 Cloud Transformation Domains in the AWS CAF?',
+        answer: '1) Technology (migrate/modernize infrastructure), 2) Process (digitize/automate operations), 3) Organization (reimagine your operating model), 4) Product (reimagine your business model).'
+    },
+    {
+        id: 'caf-10',
+        domain: 'cloud-concepts',
+        question: 'What are the 3 CAF Transformation Phases?',
+        answer: '1) Envision - demonstrate how cloud accelerates business outcomes, 2) Align - identify gaps across the 6 perspectives, 3) Launch - deliver pilot initiatives, 4) Scale - expand production pilots and business value.'
+    },
 ];
 
 // ===== QUIZ QUESTIONS =====
@@ -591,5 +652,70 @@ STUDY_DATA.quizzes = [
         options: ['AWS Budgets', 'AWS Cost Explorer', 'AWS Trusted Advisor', 'AWS Organizations'],
         correct: 1,
         explanation: 'AWS Cost Explorer lets you visualize and manage costs/usage over time with graphs, filters, and forecasting capabilities.'
+    },
+    // ===== AWS Cloud Adoption Framework (CAF) =====
+    {
+        id: 'qcaf-1',
+        domain: 'cloud-concepts',
+        question: 'How many Perspectives does the AWS Cloud Adoption Framework (CAF) have?',
+        options: ['4', '5', '6', '7'],
+        correct: 2,
+        explanation: 'The AWS CAF has 6 Perspectives: Business, People, Governance (business-focused) and Platform, Security, Operations (technology-focused).'
+    },
+    {
+        id: 'qcaf-2',
+        domain: 'cloud-concepts',
+        question: 'Which AWS CAF Perspective focuses on training, staffing, and organizational change management?',
+        options: ['Business', 'People', 'Governance', 'Operations'],
+        correct: 1,
+        explanation: 'The People Perspective focuses on evolving culture, organizational structure, roles, and training to support cloud adoption.'
+    },
+    {
+        id: 'qcaf-3',
+        domain: 'cloud-concepts',
+        question: 'Which AWS CAF Perspective ensures IT investments link to key business outcomes?',
+        options: ['People', 'Platform', 'Business', 'Governance'],
+        correct: 2,
+        explanation: 'The Business Perspective ensures cloud investments accelerate business outcomes. Common stakeholders include the CEO, CFO, and business managers.'
+    },
+    {
+        id: 'qcaf-4',
+        domain: 'cloud-concepts',
+        question: 'Which AWS CAF Perspectives are TECHNOLOGY-focused?',
+        options: ['Business, People, Governance', 'Platform, Security, Operations', 'Business, Security, Platform', 'People, Operations, Governance'],
+        correct: 1,
+        explanation: 'Platform, Security, and Operations are technology-focused. Business, People, and Governance are business-focused.'
+    },
+    {
+        id: 'qcaf-5',
+        domain: 'cloud-concepts',
+        question: 'A company needs help designing and implementing their AWS infrastructure during migration. Which CAF Perspective applies?',
+        options: ['Business', 'Operations', 'Platform', 'Governance'],
+        correct: 2,
+        explanation: 'The Platform Perspective helps build an enterprise-grade cloud platform, architect new solutions, and migrate existing workloads.'
+    },
+    {
+        id: 'qcaf-6',
+        domain: 'cloud-concepts',
+        question: 'Which CAF Perspective focuses on managing budgets, measuring cloud benefits, and managing risk?',
+        options: ['Business', 'People', 'Governance', 'Operations'],
+        correct: 2,
+        explanation: 'The Governance Perspective focuses on orchestrating cloud initiatives, maximizing organizational benefits, and minimizing transformation-related risks.'
+    },
+    {
+        id: 'qcaf-7',
+        domain: 'cloud-concepts',
+        question: 'What are the Cloud Transformation Domains in the AWS CAF?',
+        options: ['Technology, Process, Organization, Product', 'Plan, Build, Run, Optimize', 'Migrate, Modernize, Innovate, Scale', 'Envision, Align, Launch, Scale'],
+        correct: 0,
+        explanation: 'The 4 transformation domains are Technology, Process, Organization, and Product. (Envision, Align, Launch, Scale are the transformation phases.)'
+    },
+    {
+        id: 'qcaf-8',
+        domain: 'cloud-concepts',
+        question: 'A CISO wants to ensure their cloud environment meets security objectives. Which CAF Perspective should they focus on?',
+        options: ['Governance', 'Platform', 'Security', 'Operations'],
+        correct: 2,
+        explanation: 'The Security Perspective helps achieve confidentiality, integrity, and availability of data and cloud workloads. Key stakeholders include the CISO and security teams.'
     }
 ];

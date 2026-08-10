@@ -215,6 +215,7 @@
 <nav class="toc">
     <a href="#advantages">6 Advantages</a>
     <a href="#pillars">Well-Architected</a>
+    <a href="#caf">CAF</a>
     <a href="#compute">Compute</a>
     <a href="#storage">Storage</a>
     <a href="#database">Database</a>
@@ -301,6 +302,77 @@
     <p class="card-name">6. Sustainability</p>
     <p class="card-desc">Minimize environmental impacts of running cloud workloads. Reduce energy consumption and increase efficiency through right-sizing and managed services.</p>
     <div class="card-example"><strong>Example: </strong>Using Graviton (ARM) instances that use less energy, deleting unused EBS snapshots, and right-sizing over-provisioned instances.</div>
+</div>
+
+<!-- ===== AWS CLOUD ADOPTION FRAMEWORK ===== -->
+<h2 class="section-title" id="caf"><span class="emoji">&#128640;</span>AWS Cloud Adoption Framework (CAF)</h2>
+
+<p style="color: var(--text-muted); margin-bottom: 1.5rem;">The CAF organizes guidance into <strong style="color: var(--pink-hot);">6 Perspectives</strong> grouped into two focus areas. It helps organizations plan and execute their cloud adoption journey.</p>
+
+<h3 style="font-family: 'Fredoka One', cursive; color: var(--orange-glow); margin-bottom: 1rem;">Business-Focused Perspectives</h3>
+<div class="glossary-grid">
+
+<div class="card">
+    <span class="category-label cat-network">Business-Focused</span>
+    <p class="card-name">Business Perspective</p>
+    <p class="card-desc">Ensures IT aligns with business needs and cloud investments link to key business results. Covers strategy management, portfolio management, innovation, and product management.</p>
+    <div class="card-example"><strong>Stakeholders: </strong>CEO, CFO, COO, CIO, business managers</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-network">Business-Focused</span>
+    <p class="card-name">People Perspective</p>
+    <p class="card-desc">Bridges technology and business by evolving culture and organizational structure. Covers change management, training, career development, and transformation leadership.</p>
+    <div class="card-example"><strong>Stakeholders: </strong>CIO, COO, HR directors, cloud directors, cross-functional leaders</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-network">Business-Focused</span>
+    <p class="card-name">Governance Perspective</p>
+    <p class="card-desc">Orchestrate cloud initiatives while maximizing benefits and minimizing risk. Covers program/project management, budgeting, risk management, benefits measurement, and licensing.</p>
+    <div class="card-example"><strong>Stakeholders: </strong>CIO, CTO, CFO, CDO, enterprise architects, PMOs</div>
+</div>
+
+</div>
+
+<h3 style="font-family: 'Fredoka One', cursive; color: var(--blue-cyber); margin: 1.5rem 0 1rem;">Technology-Focused Perspectives</h3>
+<div class="glossary-grid">
+
+<div class="card">
+    <span class="category-label cat-storage">Tech-Focused</span>
+    <p class="card-name">Platform Perspective</p>
+    <p class="card-desc">Build an enterprise-grade cloud platform, modernize existing workloads, and implement new solutions. Covers platform architecture, data architecture, provisioning, and CI/CD.</p>
+    <div class="card-example"><strong>Stakeholders: </strong>CTO, IT managers, solutions architects, DevOps engineers</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-storage">Tech-Focused</span>
+    <p class="card-name">Security Perspective</p>
+    <p class="card-desc">Achieve confidentiality, integrity, and availability of data and workloads. Covers IAM, threat detection, vulnerability management, infrastructure security, and compliance.</p>
+    <div class="card-example"><strong>Stakeholders: </strong>CISO, CCO, IT security analysts, security architects</div>
+</div>
+
+<div class="card">
+    <span class="category-label cat-storage">Tech-Focused</span>
+    <p class="card-name">Operations Perspective</p>
+    <p class="card-desc">Ensure cloud services are delivered at agreed-upon levels. Covers event management, incident management, change management, performance monitoring, and continuity.</p>
+    <div class="card-example"><strong>Stakeholders: </strong>IT operations managers, site reliability engineers, IT support managers</div>
+</div>
+
+</div>
+
+<h3 style="font-family: 'Fredoka One', cursive; color: var(--green-lime); margin: 1.5rem 0 1rem;">Transformation Domains & Phases</h3>
+
+<div class="pillar-card">
+    <p class="card-name">4 Transformation Domains</p>
+    <p class="card-desc"><strong>Technology</strong> — migrate and modernize infrastructure, applications, data/analytics platforms. <strong>Process</strong> — digitize, automate, and optimize business operations. <strong>Organization</strong> — reimagine operating model and how teams organize around value. <strong>Product</strong> — reimagine business model by creating new value propositions.</p>
+    <div class="card-example"><strong>Example: </strong>A retail company migrates their data warehouse (Technology), automates inventory reorders (Process), creates cross-functional cloud teams (Organization), and launches a data-as-a-service product (Product).</div>
+</div>
+
+<div class="pillar-card">
+    <p class="card-name">4 Transformation Phases</p>
+    <p class="card-desc"><strong>Envision</strong> — demonstrate how cloud accelerates business outcomes, identify key stakeholders. <strong>Align</strong> — identify capability gaps across the 6 perspectives, identify cross-org dependencies. <strong>Launch</strong> — deliver pilot initiatives, generate business value. <strong>Scale</strong> — expand production pilots, scale to full desired business value.</p>
+    <div class="card-example"><strong>Example: </strong>A bank envisions cloud-based real-time fraud detection, aligns security and compliance requirements, launches a pilot for one card product, then scales to all payment channels.</div>
 </div>
 
 <!-- ===== COMPUTE SERVICES ===== -->
