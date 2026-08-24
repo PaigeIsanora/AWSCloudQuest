@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff8fd0"/>
+      <stop offset="50%" stop-color="#ff69b4"/>
+      <stop offset="100%" stop-color="#9b30ff"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="38%" r="65%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="starShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#5a0a4a" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Rounded app-icon background -->
+  <rect x="0" y="0" width="180" height="180" rx="40" ry="40" fill="url(#bg)"/>
+  <rect x="0" y="0" width="180" height="180" rx="40" ry="40" fill="url(#glow)"/>
+
+  <!-- Big central star -->
+  <g filter="url(#starShadow)">
+    <path fill="#fff4fb" stroke="#00ccff" stroke-width="4" stroke-linejoin="round"
+      d="M90 34 L104 72 L145 74 L112 100 L124 140 L90 116 L56 140 L68 100 L35 74 L76 72 Z"/>
+  </g>
+
+  <!-- Sparkle stars around it -->
+  <g fill="#ffffff">
+    <path d="M40 40 l4 10 10 4 -10 4 -4 10 -4 -10 -10 -4 10 -4 Z" opacity="0.95"/>
+    <path d="M146 46 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3 Z" opacity="0.9"/>
+    <path d="M150 132 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3 Z" opacity="0.85"/>
+    <path d="M34 128 l2.5 7 7 2.5 -7 2.5 -2.5 7 -2.5 -7 -7 -2.5 7 -2.5 Z" opacity="0.8"/>
+  </g>
+
+  <!-- Tiny dot stars -->
+  <g fill="#ffffff" opacity="0.9">
+    <circle cx="66" cy="52" r="2.5"/>
+    <circle cx="120" cy="56" r="2"/>
+    <circle cx="128" cy="112" r="2.5"/>
+    <circle cx="60" cy="116" r="2"/>
+  </g>
+</svg>
